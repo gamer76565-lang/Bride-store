@@ -258,12 +258,6 @@ window.STORE = {
         "price": 25
       },
       {
-        "id": "d5",
-        "ar": "بنغازي",
-        "en": "Benghazi",
-        "price": 0
-      },
-      {
         "id": "d6",
         "ar": "سرت",
         "en": "Sirte",
@@ -574,6 +568,12 @@ window.STORE = {
         "ar": "بنينا",
         "en": "بنينا",
         "price": 25
+      },
+      {
+        "id": "d1795573531105",
+        "ar": "السلماني",
+        "en": "السلماني",
+        "price": 10
       }
     ],
     "other": null
