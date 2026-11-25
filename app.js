@@ -7,7 +7,10 @@
       cart: "السلة", products: "منتجاتنا", search: "ابحثي عن منتج...", empty: "لا توجد منتجات مطابقة",
       all: "الكل", offers: "العروض 🔥", add: "أضيفي للسلة", pickSize: "اختاري المقاس أولًا 💕", pickColor: "اختاري اللون أولًا 💕", added: "تمت الإضافة للسلة 🎀",
       off: "خصم", sold: "نفذت الكمية", yourCart: "سلتك", total: "الإجمالي", subtotal: "مجموع المنتجات", delivery: "التوصيل", cartEmpty: "السلة فارغة",
-      send: "إرسال الطلب عبر واتساب", name: "الاسم (اختياري)", phone: "رقم الهاتف", city: "المدينة (اكتبي اسم مدينتك)", address: "العنوان التفصيلي (المنطقة، الشارع، أقرب معلم)", note: "ملاحظات (اختياري)",
+      send: "إرسال الطلب عبر واتساب", name: "الاسم (اختياري)", phone: "رقم الهاتف", city: "مدينة أخرى: اكتبي اسم مدينتك", areaPh: "من {c}؟ اختاري منطقتك", placeLbl: "📍 مكان التوصيل (اختاري إحدى الخانتين)", orWord: "أو",
+      needPlace: "اختاري منطقتك في {c} أو اكتبي اسم مدينتك", needAreaHint: "لمدينة {c} اختاري منطقتك من الخانة الثانية 👇",
+      payLbl: "💳 طريقة الدفع", needPay: "اختاري طريقة الدفع", pickArea: "اختاري المنطقة 👇", payL: "الدفع", areaL: "المنطقة", payNote: "سنرسل لك بيانات الدفع عبر واتساب بعد تأكيد الطلب",
+      address: "العنوان التفصيلي (الشارع، أقرب معلم، رقم المبنى)", note: "ملاحظات (اختياري)",
       phoneBad: "اكتبي رقم هاتف صحيح", needCity: "اكتبي اسم مدينتك", needAddr: "اكتبي العنوان التفصيلي",
       size: "المقاس", colorL: "اللون", order: "طلب جديد من الموقع", customer: "الاسم", tel: "الهاتف", cityL: "المدينة", addr: "العنوان", items: "المنتجات", noteL: "ملاحظات",
       delTo: "سعر التوصيل إلى", delOther: "سعر التوصيل لمدينتك", delAsk: "سنؤكد لك سعر التوصيل عبر واتساب", free: "توصيل مجاني", delLater: "يُحدد لاحقًا", totalNoDel: "الإجمالي (بدون التوصيل)",
@@ -20,7 +23,10 @@
       cart: "Cart", products: "Our products", search: "Search for a product...", empty: "No matching products",
       all: "All", offers: "Offers 🔥", add: "Add to cart", pickSize: "Please pick a size first 💕", pickColor: "Please pick a color first 💕", added: "Added to cart 🎀",
       off: "OFF", sold: "Sold out", yourCart: "Your cart", total: "Total", subtotal: "Items subtotal", delivery: "Delivery", cartEmpty: "Your cart is empty",
-      send: "Send order via WhatsApp", name: "Name (optional)", phone: "Phone number", city: "City (type your city)", address: "Detailed address (area, street, landmark)", note: "Notes (optional)",
+      send: "Send order via WhatsApp", name: "Name (optional)", phone: "Phone number", city: "Other city: type your city", areaPh: "In {c}? Choose your area", placeLbl: "📍 Delivery location (choose one of the two)", orWord: "or",
+      needPlace: "Choose your area in {c} or type your city", needAreaHint: "For {c}, please choose your area in the second field 👇",
+      payLbl: "💳 Payment method", needPay: "Please choose a payment method", pickArea: "Choose area 👇", payL: "Payment", areaL: "Area", payNote: "We will send you the payment details on WhatsApp after confirming your order",
+      address: "Detailed address (street, landmark, building no.)", note: "Notes (optional)",
       phoneBad: "Please enter a valid phone number", needCity: "Please enter your city", needAddr: "Please enter your detailed address",
       size: "Size", colorL: "Color", order: "New website order", customer: "Name", tel: "Phone", cityL: "City", addr: "Address", items: "Items", noteL: "Notes",
       delTo: "Delivery price to", delOther: "Delivery price to your city", delAsk: "We will confirm the delivery price on WhatsApp", free: "Free delivery", delLater: "To be confirmed", totalNoDel: "Total (without delivery)",
@@ -66,17 +72,37 @@
   /* التوصيل */
   const norm = (s) => String(s || "").toLowerCase().trim().replace(/[ً-ٟـ]/g, "").replace(/[إأآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").replace(/\s+/g, " ").replace(/^ال/, "");
   const cities = () => (S.delivery && S.delivery.cities) || [];
+  const loc = () => (S.delivery && S.delivery.local) || null;
+  const areas = () => (loc() && loc().areas) || [];
+  const localName = () => (loc() && loc().name ? loc().name[lang] || loc().name.ar : "");
+  const isLocalName = (v) => {
+    const n = norm(v), L = loc();
+    return !!(areas().length && n && L && L.name && (n === norm(L.name.ar) || n === norm(L.name.en)));
+  };
+  const hasLocalOther = () => loc() && loc().other !== null && loc().other !== undefined && loc().other !== "";
+  const shownCities = () => cities().filter((c) => !isLocalName(c.ar) && !isLocalName(c.en));
+  const updatePlaceUI = () => { $("#areaBlock").hidden = !areas().length; };
   const hasOther = () => S.delivery && S.delivery.other !== null && S.delivery.other !== undefined && S.delivery.other !== "";
   function findCity(v) {
     const n = norm(v);
     if (!n) return null;
-    return cities().find((c) => norm(c.ar) === n || norm(c.en) === n) || null;
+    return shownCities().find((c) => norm(c.ar) === n || norm(c.en) === n) || null;
   }
   function deliveryInfo() {
+    const rawA = ($("#area").value || "").trim();
     const raw = ($("#city").value || "").trim();
-    if (!raw || (!cities().length && !hasOther())) return { kind: "none" };
+    if (rawA && areas().length) {
+      const a = areas().find((x) => norm(x.ar) === norm(rawA) || norm(x.en) === norm(rawA));
+      if (a) return { kind: "city", price: +a.price || 0, name: localName() + " - " + (a[lang] || a.ar) };
+      if (document.activeElement === $("#area") && areas().some((x) => match(x, norm(rawA)) >= 0)) return { kind: "none" };
+      if (hasLocalOther()) return { kind: "other", price: +loc().other || 0 };
+      return { kind: "ask" };
+    }
+    if (raw && isLocalName(raw)) return { kind: "needArea" };
+    if (!raw || (!shownCities().length && !hasOther())) return { kind: "none" };
     const c = findCity(raw);
     if (c) return { kind: "city", price: +c.price || 0, name: c[lang] || c.ar };
+    if (document.activeElement === $("#city") && shownCities().some((x) => match(x, norm(raw)) >= 0)) return { kind: "none" };
     if (hasOther()) return { kind: "other", price: +S.delivery.other || 0 };
     return { kind: "ask" };
   }
@@ -87,13 +113,13 @@
     const sub = subtotal(), d = deliveryInfo();
     const priced = d.kind === "city" || d.kind === "other";
     $("#sub").textContent = money(sub);
-    $("#delRow").hidden = d.kind === "none";
+    $("#delRow").hidden = d.kind === "none" || d.kind === "needArea";
     $("#delPrice").textContent = priced ? delText(d) : t("delLater");
     $("#total").textContent = money(sub + (priced ? d.price : 0));
     $("#totalLbl").textContent = d.kind === "ask" ? t("totalNoDel") : t("total");
     const box = $("#delInfo");
     box.hidden = d.kind === "none";
-    box.textContent = d.kind === "city" ? `🚚 ${t("delTo")} ${d.name}: ${delText(d)}` : d.kind === "other" ? `🚚 ${t("delOther")}: ${delText(d)}` : d.kind === "ask" ? `🚚 ${t("delAsk")}` : "";
+    box.textContent = d.kind === "city" ? `🚚 ${t("delTo")} ${d.name}: ${delText(d)}` : d.kind === "other" ? `🚚 ${t("delOther")}: ${delText(d)}` : d.kind === "ask" ? `🚚 ${t("delAsk")}` : d.kind === "needArea" ? t("needAreaHint").replace("{c}", localName()) : "";
   }
 
   function applyLang() {
@@ -108,7 +134,8 @@
     $("#heroSub").textContent = (S.hero && S.hero.sub && S.hero.sub[lang]) || t("heroSub");
     $("#footTxt").textContent = t("foot");
     $("#copy").textContent = "© " + new Date().getFullYear() + " " + S.name[lang];
-    $("#cityList").innerHTML = cities().map((c) => `<option value="${esc(c[lang] || c.ar)}"></option>`).join("");
+    $("#area").placeholder = t("areaPh").replace("{c}", localName());
+    updatePlaceUI(); renderPay();
     renderCats(); renderGrid(); renderCart();
     if (pmId !== null) renderModal();
   }
@@ -242,23 +269,68 @@
   });
 
   /* إرسال الطلب */
-  $("#city").addEventListener("input", renderTotals);
-  $("#city").addEventListener("change", renderTotals);
+  /* اقتراحات المدن والمناطق أثناء الكتابة (تعمل على الجوال) */
+  const match = (c, q) => {
+    const a = norm(c.ar), e = norm(c.en);
+    if (a.startsWith(q) || e.startsWith(q)) return 0;
+    if (a.includes(q) || e.includes(q)) return 1;
+    return -1;
+  };
+  function setupSuggest(inp, box, getItems, other) {
+    const render = () => {
+      const q = norm(inp.value);
+      const list = getItems().map((c) => ({ c, s: q ? match(c, q) : 0 })).filter((x) => x.s >= 0).sort((a, b) => a.s - b.s).slice(0, 40);
+      box.innerHTML = list.map(({ c }) => `<button type="button" class="sug-i" data-v="${esc(c[lang] || c.ar)}"${c.isLocal ? ' data-local="1"' : ""}><span>${esc(c[lang] || c.ar)}</span><small>${c.isLocal ? t("pickArea") : money(+c.price || 0)}</small></button>`).join("");
+      box.hidden = !list.length;
+    };
+    inp.addEventListener("focus", render);
+    inp.addEventListener("input", () => { if (inp.value.trim()) other.value = ""; render(); renderTotals(); });
+    inp.addEventListener("blur", () => setTimeout(() => { box.hidden = true; renderTotals(); }, 180));
+    box.addEventListener("pointerdown", (e) => {
+      const b = e.target.closest(".sug-i");
+      if (!b) return;
+      e.preventDefault();
+      if (b.dataset.local) { inp.value = ""; box.hidden = true; renderTotals(); other.focus(); return; }
+      inp.value = b.dataset.v; other.value = ""; box.hidden = true; inp.blur(); renderTotals();
+    });
+  }
+  setupSuggest($("#city"), $("#citySug"), () => shownCities().concat(areas().length ? [{ ar: loc().name.ar, en: loc().name.en, price: 0, isLocal: true }] : []), $("#area"));
+  setupSuggest($("#area"), $("#areaSug"), areas, $("#city"));
+
+  /* طريقة الدفع */
+  const PAYS = [{ id: "cash", ar: "كاش", en: "Cash" }, { id: "transfer", ar: "تحويل", en: "Bank transfer" }, { id: "mobi", ar: "موبي كاش", en: "Mobi Cash" }];
+  let payVal = "";
+  function updatePayNote() {
+    const n = $("#payNote");
+    n.hidden = !(payVal === "transfer" || payVal === "mobi");
+    n.textContent = t("payNote");
+  }
+  function renderPay() {
+    $("#payOpts").innerHTML = PAYS.map((p) => `<label class="po"><input type="radio" name="pay" value="${p.id}" required ${payVal === p.id ? "checked" : ""}><span>${p[lang]}</span></label>`).join("");
+    document.querySelectorAll("input[name=pay]").forEach((r) => (r.onchange = () => { payVal = r.value; updatePayNote(); }));
+    updatePayNote();
+  }
   $("#orderForm").onsubmit = (e) => {
     e.preventDefault();
     if (!cart.length) return toast(t("cartEmpty"));
     const f = new FormData(e.target);
     const phone = String(f.get("phone") || "").trim();
     const city = String(f.get("city") || "").trim();
+    const area = String(f.get("area") || "").trim();
     const addr = String(f.get("address") || "").trim();
+    const payId = String(f.get("pay") || "");
     if (phone.replace(/\D/g, "").length < 7) return toast(t("phoneBad"));
-    if (!city) return toast(t("needCity"));
+    if (!city && !area) return toast(areas().length ? t("needPlace").replace("{c}", localName()) : t("needCity"));
+    if (deliveryInfo().kind === "needArea") return toast(t("needAreaHint").replace("{c}", localName()));
     if (!addr) return toast(t("needAddr"));
+    if (!payId) return toast(t("needPay"));
     const d = deliveryInfo(), priced = d.kind === "city" || d.kind === "other", sub = subtotal();
     const lines = cart.map((i) => `• ${prod(i.id).name[lang]} | ${t("size")}: ${i.size}${i.color ? ` | ${t("colorL")}: ${i.color}` : ""} | x${i.qty} | ${money(prod(i.id).price * i.qty)}`).join("\n");
     const msg = `*${S.name[lang]} - ${t("order")}* 🎀\n` +
       (f.get("name") ? `${t("customer")}: ${f.get("name")}\n` : "") +
-      `${t("tel")}: ${phone}\n${t("cityL")}: ${city}\n${t("addr")}: ${addr}\n` +
+      `${t("tel")}: ${phone}\n` +
+      (area ? `${t("cityL")}: ${localName()}\n${t("areaL")}: ${area}\n` : `${t("cityL")}: ${city}\n`) +
+      `${t("addr")}: ${addr}\n${t("payL")}: ${(PAYS.find((p) => p.id === payId) || {})[lang] || payId}\n` +
       `\n${t("items")}:\n${lines}\n\n${t("subtotal")}: ${money(sub)}\n${t("delivery")}: ${priced ? delText(d) : t("delLater")}\n` +
       `*${d.kind === "ask" ? t("totalNoDel") : t("total")}: ${money(sub + (priced ? d.price : 0))}*` +
       (f.get("note") ? `\n${t("noteL")}: ${f.get("note")}` : "");

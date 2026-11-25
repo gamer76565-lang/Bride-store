@@ -127,10 +127,21 @@
     <form id="orderForm">
       <input name="phone" required inputmode="tel" data-tp="phone" placeholder="رقم الهاتف">
       <input name="name" data-tp="name" placeholder="الاسم (اختياري)">
-      <input name="city" id="city" required list="cityList" autocomplete="off" data-tp="city" placeholder="المدينة (اكتبي اسم مدينتك)">
-      <datalist id="cityList"></datalist>
+      <div class="place">
+        <div class="place-lbl" data-t="placeLbl">📍 مكان التوصيل (اختاري إحدى الخانتين)</div>
+        <div class="fld"><input name="city" id="city" autocomplete="off" data-tp="city" placeholder="مدينة أخرى: اكتبي اسم مدينتك"><div class="sug" id="citySug" hidden></div></div>
+        <div id="areaBlock">
+          <div class="or"><span data-t="orWord">أو</span></div>
+          <div class="fld"><input name="area" id="area" autocomplete="off" placeholder="من بنغازي؟ اختاري منطقتك"><div class="sug" id="areaSug" hidden></div></div>
+        </div>
+      </div>
       <div id="delInfo" class="delinfo" hidden></div>
-      <input name="address" required data-tp="address" placeholder="العنوان التفصيلي (المنطقة، الشارع، أقرب معلم)">
+      <input name="address" required data-tp="address" placeholder="العنوان التفصيلي (الشارع، أقرب معلم، رقم المبنى)">
+      <div class="pay">
+        <div class="place-lbl" data-t="payLbl">💳 طريقة الدفع</div>
+        <div class="pay-opts" id="payOpts"></div>
+        <div id="payNote" class="paynote" hidden></div>
+      </div>
       <textarea name="note" rows="2" data-tp="note" placeholder="ملاحظات (اختياري)"></textarea>
       <button class="pill big wa" type="submit" data-t="send">إرسال الطلب عبر واتساب</button>
     </form>
