@@ -991,5 +991,9 @@ window.STORE = {
       ],
       "other": null
     }
+  },
+  "orders": {
+    "endpoint": "https://script.google.com/macros/s/AKfycby1vDIDfi674AHdqLtoucVkvUy5f1uixgEcat-sJ7D8p1MKelsw6Pp2dHoWA5dIJ_U/exec",
+    "showWhatsApp": true
   }
 };
