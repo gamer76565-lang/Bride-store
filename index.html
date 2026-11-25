@@ -95,7 +95,7 @@
 
   <section class="why">
     <div class="why-card"><span>🛒</span><h4 data-t="w1t">اختاري واطلبي</h4><p data-t="w1p">اختاري القطعة والمقاس وأضيفيها للسلة</p></div>
-    <div class="why-card"><span>💬</span><h4 data-t="w2t">الطلب عبر واتساب</h4><p data-t="w2p">يصلنا طلبك مباشرة ونتواصل معك لتأكيده</p></div>
+    <div class="why-card"><span>💬</span><h4 id="w2t" data-t="w2t">الطلب عبر واتساب</h4><p id="w2p" data-t="w2p">يصلنا طلبك مباشرة ونتواصل معك لتأكيده</p></div>
     <div class="why-card"><span>🎀</span><h4 data-t="w3t">عروض مستمرة</h4><p data-t="w3p">تابعي قسم العروض لأحدث الخصومات</p></div>
   </section>
 </main>
@@ -118,6 +118,7 @@
 <aside id="drawer" class="drawer" hidden>
   <div class="panel">
     <div class="panel-head"><h3 data-t="yourCart">سلتك</h3><button id="closeCart" class="pill ghost" type="button">✕</button></div>
+    <div id="cartBody">
     <div id="cartItems"></div>
     <div class="sum">
       <div class="sum-row"><span data-t="subtotal">مجموع المنتجات</span><b id="sub"></b></div>
@@ -143,8 +144,17 @@
         <div id="payNote" class="paynote" hidden></div>
       </div>
       <textarea name="note" rows="2" data-tp="note" placeholder="ملاحظات (اختياري)"></textarea>
-      <button class="pill big wa" type="submit" data-t="send">إرسال الطلب عبر واتساب</button>
+      <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button id="sendBtn" class="pill big wa" type="submit" data-t="send">إرسال الطلب عبر واتساب</button>
     </form>
+    </div>
+    <div id="done" class="done" hidden>
+      <div class="done-ico">🎀</div>
+      <h3 data-t="doneT">تم استلام طلبك! 🎉</h3>
+      <p id="doneId" class="done-id"></p>
+      <p data-t="doneP">سنتواصل معك على رقم هاتفك لتأكيد الطلب.</p>
+      <button id="doneBtn" type="button" class="pill big" data-t="keepShop">متابعة التسوق</button>
+    </div>
   </div>
 </aside>
 

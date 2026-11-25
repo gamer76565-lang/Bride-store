@@ -176,6 +176,13 @@ html[dir=ltr] .panel{border-radius:28px 0 0 28px}
 .po span{display:inline-block;background:#fff;color:var(--pink-d);border:2px solid var(--pink-l);border-radius:999px;padding:8px 18px;font-weight:800;transition:.2s}
 .po input:checked+span{background:var(--pink);color:#fff;border-color:var(--pink)}
 .po input:focus-visible+span{outline:3px solid var(--pink-d)}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.done{text-align:center;padding:50px 10px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.done-ico{font-size:64px;animation:bob 2.4s ease-in-out infinite}
+.done h3{margin:0;color:var(--pink-d);font-size:26px}
+.done p{margin:0;color:var(--muted)}
+.done-id{background:var(--pink-xl);border:2px dashed var(--pink-l);border-radius:999px;padding:6px 18px;font-weight:800;color:var(--pink-d)!important}
+.pill:disabled{opacity:.6;cursor:wait}
 .paynote{font-size:13px;color:#7a5a00;background:#fff6d8;border-radius:12px;padding:8px 12px}
 .delinfo{background:#fff6d8;border:2px dashed #f3d98b;color:#7a5a00;border-radius:16px;padding:10px 14px;font-weight:700;font-size:14px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
