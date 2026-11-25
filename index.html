@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>برايد | Bride</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- رسومات صغيرة تتكرر في الموقع -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="bow" viewBox="0 0 64 40">
+      <path d="M32 20C20 1 1 3 4 20c-3 17 16 19 28 0Z"/>
+      <path d="M32 20C44 1 63 3 60 20c3 17-16 19-28 0Z"/>
+      <circle cx="32" cy="20" r="6.5" opacity=".75"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 32 30">
+      <path d="M16 29C-6 14 4-4 16 7 28-4 38 14 16 29Z"/>
+    </symbol>
+    <symbol id="spark" viewBox="0 0 24 24">
+      <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12C8 11 11 8 12 0Z"/>
+    </symbol>
+    <!-- شخصية أصلية: العروس الصغيرة -->
+    <symbol id="mascot" viewBox="0 0 200 230">
+      <path d="M100 18C28 18 14 118 22 214h156c8-96-6-196-78-196Z" fill="#fff" fill-opacity=".85" stroke="#f7b6c8" stroke-width="3"/>
+      <path d="M58 230c0-44 20-62 42-62s42 18 42 62Z" fill="#fff" stroke="#ee6c87" stroke-width="4"/>
+      <path d="M84 176q16 14 32 0" fill="none" stroke="#ee6c87" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="46" cy="118" rx="14" ry="32" fill="#6b3a4f"/>
+      <ellipse cx="154" cy="118" rx="14" ry="32" fill="#6b3a4f"/>
+      <circle cx="100" cy="110" r="58" fill="#ffeadf" stroke="#ee6c87" stroke-width="4"/>
+      <path d="M42 104C42 46 158 46 158 104 140 78 60 78 42 104Z" fill="#6b3a4f"/>
+      <g fill="#ee6c87">
+        <circle cx="68" cy="62" r="11"/><circle cx="100" cy="50" r="12"/><circle cx="132" cy="62" r="11"/>
+      </g>
+      <g fill="#fff"><circle cx="68" cy="62" r="4"/><circle cx="100" cy="50" r="4.5"/><circle cx="132" cy="62" r="4"/></g>
+      <path d="M76 114q9-11 18 0M106 114q9-11 18 0" fill="none" stroke="#4a2a3a" stroke-width="4.5" stroke-linecap="round"/>
+      <ellipse cx="70" cy="130" rx="11" ry="7" fill="#ffadc2" opacity=".85"/>
+      <ellipse cx="130" cy="130" rx="11" ry="7" fill="#ffadc2" opacity=".85"/>
+      <path d="M91 131q9 9 18 0" fill="none" stroke="#4a2a3a" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="announce"><svg class="ic"><use href="#heart"/></svg><span id="announce"></span><svg class="ic"><use href="#heart"/></svg></div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#" aria-label="برايد"><img src="logo.png" alt="برايد Bride"></a>
+    <div class="actions">
+      <button id="langBtn" class="pill ghost" type="button">EN</button>
+      <button id="cartBtn" class="pill cart" type="button" aria-label="cart">
+        <span class="cart-ico">🛍️</span><span data-t="cart">السلة</span><b id="cartCount">0</b>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="fl f1"><use href="#bow"/></svg>
+  <svg class="fl f2"><use href="#heart"/></svg>
+  <svg class="fl f3"><use href="#spark"/></svg>
+  <svg class="fl f4"><use href="#heart"/></svg>
+  <svg class="fl f5"><use href="#spark"/></svg>
+  <svg class="fl f6"><use href="#bow"/></svg>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="tag" data-t="tag">🌙 عالم البجامات</span>
+      <h2 id="heroTitle"></h2>
+      <p id="heroSub"></p>
+      <a href="#shop" class="pill big" data-t="shopNow">تسوقي الآن</a>
+    </div>
+    <div class="hero-art">
+      <div class="blob"></div>
+      <svg class="mascot"><use href="#mascot"/></svg>
+      <div class="bubble" data-t="hello">أهلًا بك! 💕</div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40C240 80 480 0 720 30s480 50 720 10v40H0Z" fill="#fff5f8"/></svg>
+</section>
+
+<main class="wrap" id="shop">
+  <div class="sec-title"><svg class="ic"><use href="#spark"/></svg><h3 data-t="products">منتجاتنا</h3><svg class="ic"><use href="#spark"/></svg></div>
+  <div class="filters">
+    <input id="search" type="search" data-tp="search" placeholder="ابحثي عن منتج...">
+    <div id="cats" class="chips"></div>
+  </div>
+  <div id="grid" class="grid"></div>
+  <p id="empty" class="empty" hidden data-t="empty">لا توجد منتجات مطابقة</p>
+
+  <section class="why">
+    <div class="why-card"><span>🛒</span><h4 data-t="w1t">اختاري واطلبي</h4><p data-t="w1p">اختاري القطعة والمقاس وأضيفيها للسلة</p></div>
+    <div class="why-card"><span>💬</span><h4 data-t="w2t">الطلب عبر واتساب</h4><p data-t="w2p">يصلنا طلبك مباشرة ونتواصل معك لتأكيده</p></div>
+    <div class="why-card"><span>🎀</span><h4 data-t="w3t">عروض مستمرة</h4><p data-t="w3p">تابعي قسم العروض لأحدث الخصومات</p></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <img src="logo.png" alt="برايد" class="foot-logo">
+    <p id="footTxt"></p>
+    <a id="waLink" class="pill big wa" target="_blank" rel="noopener" data-t="chat">تواصلي معنا على واتساب</a>
+    <small id="copy"></small>
+  </div>
+</footer>
+
+<a id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<div id="pm" class="modal" hidden>
+  <div class="pm-card"><button id="pmClose" class="pm-x" type="button" aria-label="close">✕</button><div id="pmBody" class="pm-body"></div></div>
+</div>
+<div id="toast" class="toast" hidden></div>
+
+<aside id="drawer" class="drawer" hidden>
+  <div class="panel">
+    <div class="panel-head"><h3 data-t="yourCart">سلتك</h3><button id="closeCart" class="pill ghost" type="button">✕</button></div>
+    <div id="cartItems"></div>
+    <div class="sum">
+      <div class="sum-row"><span data-t="subtotal">مجموع المنتجات</span><b id="sub"></b></div>
+      <div class="sum-row" id="delRow" hidden><span data-t="delivery">التوصيل</span><b id="delPrice"></b></div>
+      <div class="total"><span id="totalLbl" data-t="total">الإجمالي</span><b id="total"></b></div>
+    </div>
+    <form id="orderForm">
+      <input name="phone" required inputmode="tel" data-tp="phone" placeholder="رقم الهاتف">
+      <input name="name" data-tp="name" placeholder="الاسم (اختياري)">
+      <input name="city" id="city" required list="cityList" autocomplete="off" data-tp="city" placeholder="المدينة (اكتبي اسم مدينتك)">
+      <datalist id="cityList"></datalist>
+      <div id="delInfo" class="delinfo" hidden></div>
+      <input name="address" required data-tp="address" placeholder="العنوان التفصيلي (المنطقة، الشارع، أقرب معلم)">
+      <textarea name="note" rows="2" data-tp="note" placeholder="ملاحظات (اختياري)"></textarea>
+      <button class="pill big wa" type="submit" data-t="send">إرسال الطلب عبر واتساب</button>
+    </form>
+  </div>
+</aside>
+
+<script src="products.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
