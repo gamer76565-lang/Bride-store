@@ -1,6 +1,8 @@
 (function () {
   const S = window.STORE;
   S.delivery = S.delivery || { cities: [], other: null };
+  S.orders = S.orders || { endpoint: "", showWhatsApp: false };
+  const ordersOn = () => !!(S.orders && S.orders.endpoint);
   const UI = {
     ar: {
       announce: "اطلبي بسهولة عبر واتساب", tag: "🌙 عالم البجامات", shopNow: "تسوقي الآن", hello: "أهلًا بك! 💕",
@@ -9,7 +11,10 @@
       off: "خصم", sold: "نفذت الكمية", yourCart: "سلتك", total: "الإجمالي", subtotal: "مجموع المنتجات", delivery: "التوصيل", cartEmpty: "السلة فارغة",
       send: "إرسال الطلب عبر واتساب", name: "الاسم (اختياري)", phone: "رقم الهاتف", city: "مدينة أخرى: اكتبي اسم مدينتك", areaPh: "من {c}؟ اختاري منطقتك", placeLbl: "📍 مكان التوصيل (اختاري إحدى الخانتين)", orWord: "أو",
       needPlace: "اختاري منطقتك في {c} أو اكتبي اسم مدينتك", needAreaHint: "لمدينة {c} اختاري منطقتك من الخانة الثانية 👇",
-      payLbl: "💳 طريقة الدفع", needPay: "اختاري طريقة الدفع", pickArea: "اختاري المنطقة 👇", payL: "الدفع", areaL: "المنطقة", payNote: "سنرسل لك بيانات الدفع عبر واتساب بعد تأكيد الطلب",
+      payLbl: "💳 طريقة الدفع", needPay: "اختاري طريقة الدفع", pickArea: "اختاري المنطقة 👇",
+      sendOrder: "تأكيد الطلب ✅", sending: "جاري إرسال طلبك...", sendFail: "تعذّر إرسال الطلب. تأكدي من الإنترنت وحاولي مرة أخرى",
+      doneT: "تم استلام طلبك! 🎉", doneNo: "رقم طلبك", doneP: "سنتواصل معك على رقم هاتفك لتأكيد الطلب.", keepShop: "متابعة التسوق",
+      announceOrder: "اطلبي بسهولة من الموقع", heroSubOrder: "اختاري مقاسك واطلبي بسهولة", w2tOrder: "طلبك يصلنا مباشرة", w2pOrder: "نتواصل معك على هاتفك لتأكيد الطلب", payL: "الدفع", areaL: "المنطقة", payNote: "سنرسل لك بيانات الدفع عبر واتساب بعد تأكيد الطلب",
       address: "العنوان التفصيلي (الشارع، أقرب معلم، رقم المبنى)", note: "ملاحظات (اختياري)",
       phoneBad: "اكتبي رقم هاتف صحيح", needCity: "اكتبي اسم مدينتك", needAddr: "اكتبي العنوان التفصيلي",
       size: "المقاس", colorL: "اللون", order: "طلب جديد من الموقع", customer: "الاسم", tel: "الهاتف", cityL: "المدينة", addr: "العنوان", items: "المنتجات", noteL: "ملاحظات",
@@ -25,7 +30,10 @@
       off: "OFF", sold: "Sold out", yourCart: "Your cart", total: "Total", subtotal: "Items subtotal", delivery: "Delivery", cartEmpty: "Your cart is empty",
       send: "Send order via WhatsApp", name: "Name (optional)", phone: "Phone number", city: "Other city: type your city", areaPh: "In {c}? Choose your area", placeLbl: "📍 Delivery location (choose one of the two)", orWord: "or",
       needPlace: "Choose your area in {c} or type your city", needAreaHint: "For {c}, please choose your area in the second field 👇",
-      payLbl: "💳 Payment method", needPay: "Please choose a payment method", pickArea: "Choose area 👇", payL: "Payment", areaL: "Area", payNote: "We will send you the payment details on WhatsApp after confirming your order",
+      payLbl: "💳 Payment method", needPay: "Please choose a payment method", pickArea: "Choose area 👇",
+      sendOrder: "Confirm order ✅", sending: "Sending your order...", sendFail: "Could not send the order. Check your connection and try again",
+      doneT: "We received your order! 🎉", doneNo: "Your order number", doneP: "We will contact you on your phone number to confirm.", keepShop: "Continue shopping",
+      announceOrder: "Order easily from the website", heroSubOrder: "Pick your size and order easily", w2tOrder: "Your order reaches us directly", w2pOrder: "We call you to confirm the order", payL: "Payment", areaL: "Area", payNote: "We will send you the payment details on WhatsApp after confirming your order",
       address: "Detailed address (street, landmark, building no.)", note: "Notes (optional)",
       phoneBad: "Please enter a valid phone number", needCity: "Please enter your city", needAddr: "Please enter your detailed address",
       size: "Size", colorL: "Color", order: "New website order", customer: "Name", tel: "Phone", cityL: "City", addr: "Address", items: "Items", noteL: "Notes",
@@ -129,10 +137,17 @@
     $("#langBtn").textContent = lang === "ar" ? "EN" : "عربي";
     document.querySelectorAll("[data-t]").forEach((e) => { if (t(e.dataset.t) != null) e.textContent = t(e.dataset.t); });
     document.querySelectorAll("[data-tp]").forEach((e) => (e.placeholder = t(e.dataset.tp)));
-    $("#announce").textContent = t("announce");
+    $("#announce").textContent = t(ordersOn() ? "announceOrder" : "announce");
     $("#heroTitle").textContent = (S.hero && S.hero.title && S.hero.title[lang]) || t("heroTitle");
-    $("#heroSub").textContent = (S.hero && S.hero.sub && S.hero.sub[lang]) || t("heroSub");
+    $("#heroSub").textContent = (S.hero && S.hero.sub && S.hero.sub[lang]) || t(ordersOn() ? "heroSubOrder" : "heroSub");
     $("#footTxt").textContent = t("foot");
+    if (ordersOn()) {
+      $("#w2t").textContent = t("w2tOrder"); $("#w2p").textContent = t("w2pOrder");
+      $("#sendBtn").textContent = t("sendOrder");
+    }
+    $("#sendBtn").classList.toggle("wa", !ordersOn());
+    const showWa = !ordersOn() || !!(S.orders && S.orders.showWhatsApp);
+    $("#waFloat").hidden = !showWa; $("#waLink").hidden = !showWa;
     $("#copy").textContent = "© " + new Date().getFullYear() + " " + S.name[lang];
     $("#area").placeholder = t("areaPh").replace("{c}", localName());
     updatePlaceUI(); renderPay();
@@ -268,6 +283,39 @@
     if (e.key === "ArrowRight") stepImg(lang === "ar" ? -1 : 1);
   });
 
+  /* إرسال الطلب إلى جدول المتجر (بدون واتساب) */
+  async function sendOrder(order) {
+    const opts = { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(order) };
+    try {
+      const r = await fetch(S.orders.endpoint, opts);
+      const j = await r.json();
+      return !!(j && j.ok);
+    } catch (e) {
+      if (!(e instanceof TypeError)) return false;
+      // مشكلة اتصال/CORS: نعيد المحاولة مرة بدون قراءة الرد، والسكربت يتجاهل التكرار بنفس رقم الطلب
+      try { await fetch(S.orders.endpoint, Object.assign({}, opts, { mode: "no-cors" })); return true; } catch (e2) { return false; }
+    }
+  }
+  async function submitOrder(form, v) {
+    const btn = $("#sendBtn");
+    btn.disabled = true; btn.textContent = t("sending");
+    const id = "BR-" + new Date().toISOString().slice(2, 10).replace(/-/g, "") + "-" + Math.floor(1000 + Math.random() * 9000);
+    const items = cart.map((i) => { const p = prod(i.id); return { name: p.name.ar, size: i.size, color: i.color || "", qty: i.qty, price: p.price, total: p.price * i.qty }; });
+    const order = {
+      id, phone: v.phone, name: v.name, city: v.area ? (loc() && loc().name.ar) || "" : v.city, area: v.area, address: v.addr,
+      pay: (PAYS.find((p) => p.id === v.payId) || {}).ar || v.payId, items, subtotal: v.sub,
+      delivery: v.priced ? v.d.price : null, deliveryText: v.priced ? (v.d.price ? String(v.d.price) : "مجاني") : "يُحدد لاحقًا",
+      total: v.sub + (v.priced ? v.d.price : 0), totalNote: v.d.kind === "ask" ? "بدون التوصيل" : "",
+      note: v.note, currency: S.currency.ar, site: S.name.ar, hp: v.hp
+    };
+    const ok = await sendOrder(order);
+    btn.disabled = false; btn.textContent = t("sendOrder");
+    if (!ok) return toast(t("sendFail"));
+    cart = []; saveCart(); form.reset(); payVal = ""; renderPay(); renderCart();
+    $("#doneId").textContent = t("doneNo") + ": " + id;
+    $("#cartBody").hidden = true; $("#done").hidden = false;
+  }
+
   /* إرسال الطلب */
   /* اقتراحات المدن والمناطق أثناء الكتابة (تعمل على الجوال) */
   const match = (c, q) => {
@@ -325,6 +373,10 @@
     if (!addr) return toast(t("needAddr"));
     if (!payId) return toast(t("needPay"));
     const d = deliveryInfo(), priced = d.kind === "city" || d.kind === "other", sub = subtotal();
+    if (ordersOn()) {
+      submitOrder(e.target, { phone, name: String(f.get("name") || "").trim(), city, area, addr, payId, note: String(f.get("note") || "").trim(), hp: String(f.get("website") || ""), d, priced, sub });
+      return;
+    }
     const lines = cart.map((i) => `• ${prod(i.id).name[lang]} | ${t("size")}: ${i.size}${i.color ? ` | ${t("colorL")}: ${i.color}` : ""} | x${i.qty} | ${money(prod(i.id).price * i.qty)}`).join("\n");
     const msg = `*${S.name[lang]} - ${t("order")}* 🎀\n` +
       (f.get("name") ? `${t("customer")}: ${f.get("name")}\n` : "") +
@@ -340,7 +392,8 @@
   const wa = "https://wa.me/" + S.whatsapp;
   $("#waLink").href = wa; $("#waFloat").href = wa;
   $("#langBtn").onclick = () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); };
-  $("#cartBtn").onclick = () => ($("#drawer").hidden = false);
+  $("#cartBtn").onclick = () => { $("#done").hidden = true; $("#cartBody").hidden = false; $("#drawer").hidden = false; };
+  $("#doneBtn").onclick = () => { $("#done").hidden = true; $("#cartBody").hidden = false; $("#drawer").hidden = true; };
   $("#closeCart").onclick = () => ($("#drawer").hidden = true);
   $("#drawer").onclick = (e) => { if (e.target.id === "drawer") $("#drawer").hidden = true; };
   $("#search").oninput = (e) => { q = e.target.value; renderGrid(); };
