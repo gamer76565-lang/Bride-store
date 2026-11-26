@@ -1,9 +1,6 @@
-/*
-  استقبال طلبات موقع برايد في جدول Google
-  ----------------------------------------
-  الطريقة مشروحة في ملف: طريقة-استقبال-الطلبات.txt
-  لصق هذا الكود كما هو داخل Apps Script، وغيّري فقط الإعدادات في الأسفل.
-*/
+// استقبال طلبات موقع برايد في جدول Google
+// الطريقة مشروحة في ملف: طريقة-استقبال-الطلبات.txt
+// الصقي هذا الكود كما هو، وغيّري فقط الإعدادات (CONFIG) في الأسفل.
 
 const CONFIG = {
   SHEET_NAME: "الطلبات",
@@ -73,7 +70,14 @@ function sheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sh = ss.getSheetByName(CONFIG.SHEET_NAME);
   if (!sh) {
-    sh = ss.insertSheet(CONFIG.SHEET_NAME);
+    // نستخدم أول ورقة إن كانت فارغة، وإلا ننشئ ورقة جديدة
+    const first = ss.getSheets()[0];
+    if (first && first.getLastRow() === 0) {
+      sh = first;
+      sh.setName(CONFIG.SHEET_NAME);
+    } else {
+      sh = ss.insertSheet(CONFIG.SHEET_NAME);
+    }
   }
   if (sh.getLastRow() === 0) {
     sh.appendRow(HEADERS);
@@ -97,7 +101,8 @@ function notify_(o, itemsText, delivery, total) {
     "الدفع: " + clip_(o.pay) + "\n\n" +
     itemsText + "\n\n" +
     "التوصيل: " + delivery + "\n" +
-    "الإجمالي: " + total + (o.note ? "\nملاحظات: " + clip_(o.note) : "");
+    "الإجمالي: " + total + (o.note ? "\nملاحظات: " + clip_(o.note) : "") +
+    "\n\nجدول الطلبات: " + SpreadsheetApp.getActiveSpreadsheet().getUrl();
 
   if (CONFIG.EMAIL) {
     try { MailApp.sendEmail({ to: CONFIG.EMAIL, subject: "طلب جديد " + o.id, body: text }); } catch (e) {}

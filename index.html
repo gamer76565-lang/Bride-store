@@ -77,7 +77,7 @@
     </div>
     <div class="hero-art">
       <div class="blob"></div>
-      <svg class="mascot"><use href="#mascot"/></svg>
+      <img class="mascot" src="logo.png" alt="برايد Bride">
       <div class="bubble" data-t="hello">أهلًا بك! 💕</div>
     </div>
   </div>
@@ -152,7 +152,13 @@
       <div class="done-ico">🎀</div>
       <h3 data-t="doneT">تم استلام طلبك! 🎉</h3>
       <p id="doneId" class="done-id"></p>
-      <p data-t="doneP">سنتواصل معك على رقم هاتفك لتأكيد الطلب.</p>
+      <button id="copyId" type="button" class="pill ghost" data-t="copyId">📋 نسخ كود الطلب</button>
+      <div class="confirm-box">
+        <b data-t="confT">⚠️ خطوة مهمة لتأكيد طلبك</b>
+        <p data-t="confP">احتفظي بكود الطلب أو بصورة لهذه الشاشة. ولتأكيد طلبك أرسلي الكود (أو صورة الشاشة) إلى واتساب أو ماسنجر صفحتنا، من نفس صاحبة الطلب، لنتواصل معك مباشرة بخصوص الطلب أو أي تأخير أو عدم توفر.</p>
+      </div>
+      <a id="doneWa" class="pill big wa" target="_blank" rel="noopener" hidden data-t="doneWa">💬 إرسال الكود عبر واتساب</a>
+      <a id="doneMs" class="pill big ms" target="_blank" rel="noopener" hidden data-t="doneMs">✉️ إرسال الكود عبر ماسنجر</a>
       <button id="doneBtn" type="button" class="pill big" data-t="keepShop">متابعة التسوق</button>
     </div>
   </div>

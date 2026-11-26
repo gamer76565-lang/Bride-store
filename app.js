@@ -13,6 +13,9 @@
       needPlace: "اختاري منطقتك في {c} أو اكتبي اسم مدينتك", needAreaHint: "لمدينة {c} اختاري منطقتك من الخانة الثانية 👇",
       payLbl: "💳 طريقة الدفع", needPay: "اختاري طريقة الدفع", pickArea: "اختاري المنطقة 👇",
       sendOrder: "تأكيد الطلب ✅", sending: "جاري إرسال طلبك...", sendFail: "تعذّر إرسال الطلب. تأكدي من الإنترنت وحاولي مرة أخرى",
+      doneWa: "💬 إرسال الكود عبر واتساب", doneMs: "✉️ إرسال الكود عبر ماسنجر", waMsg: "مرحبًا، أريد تأكيد طلبي رقم", copyId: "📋 نسخ كود الطلب", copied: "تم نسخ الكود ✅",
+      confT: "⚠️ خطوة مهمة لتأكيد طلبك",
+      confP: "احتفظي بكود الطلب أو بصورة لهذه الشاشة. ولتأكيد طلبك أرسلي الكود (أو صورة الشاشة) إلى واتساب أو ماسنجر صفحتنا، من نفس صاحبة الطلب، لنتواصل معك مباشرة بخصوص الطلب أو أي تأخير أو عدم توفر.",
       doneT: "تم استلام طلبك! 🎉", doneNo: "رقم طلبك", doneP: "سنتواصل معك على رقم هاتفك لتأكيد الطلب.", keepShop: "متابعة التسوق",
       announceOrder: "اطلبي بسهولة من الموقع", heroSubOrder: "اختاري مقاسك واطلبي بسهولة", w2tOrder: "طلبك يصلنا مباشرة", w2pOrder: "نتواصل معك على هاتفك لتأكيد الطلب", payL: "الدفع", areaL: "المنطقة", payNote: "سنرسل لك بيانات الدفع عبر واتساب بعد تأكيد الطلب",
       address: "العنوان التفصيلي (الشارع، أقرب معلم، رقم المبنى)", note: "ملاحظات (اختياري)",
@@ -32,6 +35,9 @@
       needPlace: "Choose your area in {c} or type your city", needAreaHint: "For {c}, please choose your area in the second field 👇",
       payLbl: "💳 Payment method", needPay: "Please choose a payment method", pickArea: "Choose area 👇",
       sendOrder: "Confirm order ✅", sending: "Sending your order...", sendFail: "Could not send the order. Check your connection and try again",
+      doneWa: "💬 Send the code via WhatsApp", doneMs: "✉️ Send the code via Messenger", waMsg: "Hello, I'd like to confirm my order no.", copyId: "📋 Copy order code", copied: "Code copied ✅",
+      confT: "⚠️ Important step to confirm your order",
+      confP: "Keep your order code or take a screenshot of this screen. To confirm your order, send the code (or the screenshot) to our WhatsApp or Messenger, from the customer's own account, so we can reach you directly about the order, any delay or if an item is unavailable.",
       doneT: "We received your order! 🎉", doneNo: "Your order number", doneP: "We will contact you on your phone number to confirm.", keepShop: "Continue shopping",
       announceOrder: "Order easily from the website", heroSubOrder: "Pick your size and order easily", w2tOrder: "Your order reaches us directly", w2pOrder: "We call you to confirm the order", payL: "Payment", areaL: "Area", payNote: "We will send you the payment details on WhatsApp after confirming your order",
       address: "Detailed address (street, landmark, building no.)", note: "Notes (optional)",
@@ -296,6 +302,7 @@
       try { await fetch(S.orders.endpoint, Object.assign({}, opts, { mode: "no-cors" })); return true; } catch (e2) { return false; }
     }
   }
+  let lastId = "";
   async function submitOrder(form, v) {
     const btn = $("#sendBtn");
     btn.disabled = true; btn.textContent = t("sending");
@@ -313,6 +320,12 @@
     if (!ok) return toast(t("sendFail"));
     cart = []; saveCart(); form.reset(); payVal = ""; renderPay(); renderCart();
     $("#doneId").textContent = t("doneNo") + ": " + id;
+    const dw = $("#doneWa");
+    dw.hidden = !S.whatsapp;
+    dw.href = "https://wa.me/" + S.whatsapp + "?text=" + encodeURIComponent(t("waMsg") + " " + id);
+    const dm = $("#doneMs"), mid = String(S.messenger || "").trim().replace(/^https?:\/\/(www\.)?(m\.me|facebook\.com|fb\.com)\//i, "").replace(/\/+$/, "");
+    dm.hidden = !mid; dm.href = "https://m.me/" + encodeURIComponent(mid);
+    lastId = id;
     $("#cartBody").hidden = true; $("#done").hidden = false;
   }
 
@@ -389,6 +402,11 @@
     window.open("https://wa.me/" + S.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
   };
 
+  $("#copyId").onclick = async () => {
+    try { await navigator.clipboard.writeText(lastId); }
+    catch (e) { const ta = document.createElement("textarea"); ta.value = lastId; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e2) {} ta.remove(); }
+    toast(t("copied"));
+  };
   const wa = "https://wa.me/" + S.whatsapp;
   $("#waLink").href = wa; $("#waFloat").href = wa;
   $("#langBtn").onclick = () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); };
