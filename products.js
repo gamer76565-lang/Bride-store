@@ -71,109 +71,142 @@ window.STORE = {
     },
     {
       "name": {
-        "ar": "بجامه الفيونكه الرصاصيه 3",
-        "en": "بجامه الفيونكه الرصاصيه 3"
+        "ar": "بجامه كاتفه (كود 33)",
+        "en": "بجامه كاتفه (كود 33)"
       },
       "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
+      "price": 78,
+      "oldPrice": 85,
       "sizes": [
-        "L",
-        "XL"
+        "XL",
+        "XXL"
       ],
       "emoji": "🎀",
       "images": [
-        "images/403349b3236g.jpg",
-        "images/6aa1ec171x9s.jpg",
-        "images/4dd2d8c12f48.jpg"
+        "images/a5265a681n74.jpg",
+        "images/3fc3f76e14fc.jpg",
+        "images/85ecfec22374.jpg"
       ],
-      "image": "images/403349b3236g.jpg",
+      "image": "images/a5265a681n74.jpg",
       "soldOut": false,
+      "badge": "",
       "desc": {
-        "ar": "خامه قطن ناعم و مبطنه",
-        "en": "خامه قطن ناعم و مبطنه"
+        "ar": "",
+        "en": ""
       },
-      "id": 13
+      "colors": [],
+      "id": 33
     },
     {
       "name": {
-        "ar": "بجامه الفلامنقو",
-        "en": "بجامه الفلامنقو"
+        "ar": "بجامه كاتفه (كود 32)",
+        "en": "بجامه كاتفه (كود 32)"
       },
       "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
+      "price": 78,
+      "oldPrice": 85,
       "sizes": [
-        "L",
-        "XL"
+        "XL",
+        "XXL"
       ],
       "emoji": "🎀",
       "images": [
-        "images/94a5b8381wrw.jpg",
-        "images/24a8764a1luc.jpg",
-        "images/504569c81t4k.jpg"
+        "images/c53cd60a1rsg.jpg",
+        "images/a28f2c0c19f4.jpg",
+        "images/a14512752794.jpg"
       ],
-      "image": "images/94a5b8381wrw.jpg",
+      "image": "images/c53cd60a1rsg.jpg",
       "soldOut": false,
+      "badge": "",
       "desc": {
-        "ar": "خامه قطن و مبطنه من الداخل قطن",
-        "en": "خامه قطن و مبطنه من الداخل قطن"
+        "ar": "",
+        "en": ""
       },
-      "id": 11
+      "colors": [],
+      "id": 32
     },
     {
       "name": {
-        "ar": "بجامه فيونكه الورديه",
-        "en": "بجامه فيونكه الورديه"
+        "ar": "بجامه كاتفه (كود 31)",
+        "en": "بجامه كاتفه (كود 31)"
       },
       "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
+      "price": 78,
+      "oldPrice": 85,
       "sizes": [
-        "s",
-        "m",
-        "L"
+        "XL",
+        "XXL"
       ],
       "emoji": "🎀",
-      "image": "images/2a4a89a42dpw.jpg",
-      "soldOut": false,
-      "id": 9,
       "images": [
-        "images/2a4a89a42dpw.jpg",
-        "images/ff62e0001h88.jpg"
+        "images/8d6560e91624.jpg",
+        "images/85c0a4741zb8.jpg"
       ],
+      "image": "images/8d6560e91624.jpg",
+      "soldOut": false,
+      "badge": "",
       "desc": {
-        "ar": "خامه قطنيه ناعمه مبطنه قطن",
-        "en": "خامه قطنيه ناعمه مبطنه قطن"
-      }
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 31
     },
     {
       "name": {
-        "ar": "بجامه هالو كاتي البيضاء",
-        "en": "بجامه هالو كاتي البيضاء"
+        "ar": "بجامه كاتفه (كود 22)",
+        "en": "بجامه كاتفه (كود 22)"
       },
       "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
+      "price": 78,
+      "oldPrice": 85,
       "sizes": [
-        "L",
-        "XL"
+        "XL",
+        "XXL"
       ],
       "emoji": "🎀",
       "images": [
-        "images/a24729ad1xho.jpg",
-        "images/51f4eb511olw.jpg",
-        "images/747a704f1nfc.jpg"
+        "images/41afe1bd1muw.jpg",
+        "images/330ac5af1cs4.jpg",
+        "images/66be12e72ato.jpg"
       ],
-      "image": "images/a24729ad1xho.jpg",
+      "image": "images/41afe1bd1muw.jpg",
       "soldOut": false,
+      "badge": "",
       "desc": {
-        "ar": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن",
-        "en": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن"
+        "ar": "",
+        "en": ""
       },
-      "id": 10,
-      "badge": "best",
-      "colors": []
+      "colors": [],
+      "id": 30
+    },
+    {
+      "name": {
+        "ar": "بجامه كاتفه (كود 12)",
+        "en": "بجامه كاتفه (كود 12)"
+      },
+      "category": "winter",
+      "price": 78,
+      "oldPrice": 85,
+      "sizes": [
+        "XL",
+        "XXL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/a75040d21a74.jpg",
+        "images/e1678f7c113w.jpg",
+        "images/5bf8262d15jk.jpg"
+      ],
+      "image": "images/a75040d21a74.jpg",
+      "soldOut": false,
+      "badge": "",
+      "desc": {
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 29
     },
     {
       "name": {
@@ -205,10 +238,116 @@ window.STORE = {
     },
     {
       "name": {
+        "ar": "بجامه الفيونكه الرصاصيه 3",
+        "en": "بجامه الفيونكه الرصاصيه 3"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/403349b3236g.jpg",
+        "images/6aa1ec171x9s.jpg",
+        "images/4dd2d8c12f48.jpg"
+      ],
+      "image": "images/403349b3236g.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "خامه قطن ناعم و مبطنه",
+        "en": "خامه قطن ناعم و مبطنه"
+      },
+      "id": 13
+    },
+    {
+      "name": {
+        "ar": "بجامه فيونكه الورديه",
+        "en": "بجامه فيونكه الورديه"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "s",
+        "m",
+        "L"
+      ],
+      "emoji": "🎀",
+      "image": "images/2a4a89a42dpw.jpg",
+      "soldOut": false,
+      "id": 9,
+      "images": [
+        "images/2a4a89a42dpw.jpg",
+        "images/ff62e0001h88.jpg"
+      ],
+      "desc": {
+        "ar": "خامه قطنيه ناعمه مبطنه قطن",
+        "en": "خامه قطنيه ناعمه مبطنه قطن"
+      }
+    },
+    {
+      "name": {
+        "ar": "بجامه الفلامنقو",
+        "en": "بجامه الفلامنقو"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/94a5b8381wrw.jpg",
+        "images/24a8764a1luc.jpg",
+        "images/504569c81t4k.jpg"
+      ],
+      "image": "images/94a5b8381wrw.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "خامه قطن و مبطنه من الداخل قطن",
+        "en": "خامه قطن و مبطنه من الداخل قطن"
+      },
+      "id": 11
+    },
+    {
+      "name": {
+        "ar": "بجامه هالو كاتي البيضاء",
+        "en": "بجامه هالو كاتي البيضاء"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/a24729ad1xho.jpg",
+        "images/51f4eb511olw.jpg",
+        "images/747a704f1nfc.jpg"
+      ],
+      "image": "images/a24729ad1xho.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن",
+        "en": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن"
+      },
+      "id": 10,
+      "badge": "best",
+      "colors": []
+    },
+    {
+      "name": {
         "ar": "بجامه البانده",
         "en": "بجامه البانده"
       },
-      "category": "summer",
+      "category": "winter",
       "price": 65,
       "oldPrice": 0,
       "sizes": [
@@ -229,7 +368,8 @@ window.STORE = {
         "en": "خامه قطن ناعمه و مبطنه بقطن من الداخل"
       },
       "colors": [],
-      "id": 20
+      "id": 20,
+      "badge": ""
     },
     {
       "name": {
@@ -916,6 +1056,48 @@ window.STORE = {
         "ar": "بنينا",
         "en": "بنينا",
         "price": 25
+      },
+      {
+        "id": "d1795806158866",
+        "ar": "بودريسه",
+        "en": "بودريسه",
+        "price": 20
+      },
+      {
+        "id": "d1795806184766",
+        "ar": "نالوت",
+        "en": "نالوت",
+        "price": 50
+      },
+      {
+        "id": "d1795806213266",
+        "ar": "سيدي خليفه",
+        "en": "سيدي خليفه",
+        "price": 20
+      },
+      {
+        "id": "d1795806255106",
+        "ar": "البياضه",
+        "en": "البياضه",
+        "price": 20
+      },
+      {
+        "id": "d1795806265522",
+        "ar": "فرزوغه",
+        "en": "فرزوغه",
+        "price": 30
+      },
+      {
+        "id": "d1795806270622",
+        "ar": "بطه",
+        "en": "بطه",
+        "price": 20
+      },
+      {
+        "id": "d1795806282821",
+        "ar": "التريه",
+        "en": "التريه",
+        "price": 25
       }
     ],
     "other": null,
@@ -1253,6 +1435,12 @@ window.STORE = {
           "id": "l1795610600454",
           "ar": "بن يونس",
           "en": "بن يونس",
+          "price": 10
+        },
+        {
+          "id": "l1795806011408",
+          "ar": "السباله",
+          "en": "السباله",
           "price": 10
         }
       ],
