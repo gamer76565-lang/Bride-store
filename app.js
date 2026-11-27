@@ -2,9 +2,22 @@
   const S = window.STORE;
   S.delivery = S.delivery || { cities: [], other: null };
   S.orders = S.orders || { endpoint: "", showWhatsApp: false };
+  S.freeDelivery = S.freeDelivery || { min: 0 };
+  S.announce = S.announce || { ar: "", en: "" };
+  S.social = S.social || { facebook: "", tiktok: "" };
+  S.pages = S.pages || {};
+  if (!Array.isArray(S.phones)) S.phones = ["0925788834", "0915788834"];
+  const DEF_PAGES = {
+    about: { ar: "برايد متجر بجامات ناعمة وأنيقة بلمسة وردية. نختار لك أجمل التصاميم والخامات المريحة لتنامي براحة وأناقة. اطلبي من الموقع ونتواصل معك لتأكيد طلبك وتوصيله.", en: "Bride is a store for soft, stylish pajamas with a pink touch. We pick the prettiest designs and the coziest fabrics. Order from the website and we will contact you to confirm and deliver your order." },
+    policy: { ar: "للاستفسار عن تبديل أو إرجاع أي قطعة، تواصلي معنا عبر واتساب أو ماسنجر مع كود طلبك وسنساعدك بأسرع وقت.", en: "To ask about exchanging or returning an item, contact us on WhatsApp or Messenger with your order code and we will help you as soon as possible." }
+  };
+  const pageTxt = (k) => { const x = (S.pages && S.pages[k]) || {}; return (x[lang] || x.ar || "").trim() || DEF_PAGES[k][lang]; };
   const ordersOn = () => !!(S.orders && S.orders.endpoint);
   const UI = {
     ar: {
+      freeHint: "أضيفي منتجات بقيمة {n} للحصول على توصيل مجاني 🚚", freeDone: "🎉 مبروك! توصيلك مجاني",
+      bLow: "بقي قطع قليلة", bBest: "الأكثر طلبًا", bNew: "جديد", shareL: "شاركي:", shareWa: "واتساب", shareFb: "فيسبوك", copyLink: "نسخ الرابط", linkCopied: "تم نسخ الرابط ✅", shareTxt: "شوفي هذا المنتج من برايد 💕",
+      aboutT: "من نحن", policyT: "سياسة الإرجاع والتبديل", followUs: "تابعينا:", fbL: "فيسبوك", ttL: "تيك توك", waL: "واتساب", callUs: "اتصلي بنا:",
       announce: "اطلبي بسهولة عبر واتساب", tag: "🌙 عالم البجامات", shopNow: "تسوقي الآن", hello: "أهلًا بك! 💕",
       cart: "السلة", products: "منتجاتنا", search: "ابحثي عن منتج...", empty: "لا توجد منتجات مطابقة",
       all: "الكل", offers: "العروض 🔥", add: "أضيفي للسلة", pickSize: "اختاري المقاس أولًا 💕", pickColor: "اختاري اللون أولًا 💕", added: "تمت الإضافة للسلة 🎀",
@@ -13,7 +26,7 @@
       needPlace: "اختاري منطقتك في {c} أو اكتبي اسم مدينتك", needAreaHint: "لمدينة {c} اختاري منطقتك من الخانة الثانية 👇",
       payLbl: "💳 طريقة الدفع", needPay: "اختاري طريقة الدفع", pickArea: "اختاري المنطقة 👇",
       sendOrder: "تأكيد الطلب ✅", sending: "جاري إرسال طلبك...", sendFail: "تعذّر إرسال الطلب. تأكدي من الإنترنت وحاولي مرة أخرى",
-      doneWa: "💬 إرسال الكود عبر واتساب", doneMs: "✉️ إرسال الكود عبر ماسنجر", waMsg: "مرحبًا، أريد تأكيد طلبي رقم", copyId: "📋 نسخ كود الطلب", copied: "تم نسخ الكود ✅",
+      doneWa: "💬 إرسال الكود عبر واتساب", doneMs: "✉️ إرسال الكود عبر ماسنجر", doneFb: "لا يفتح ماسنجر؟ افتحي صفحتنا على فيسبوك وراسلينا من هناك", pasteIt: "تم نسخ الكود ✅ الصقيه في المحادثة", waMsg: "مرحبًا، أريد تأكيد طلبي رقم", copyId: "📋 نسخ كود الطلب", copied: "تم نسخ الكود ✅",
       confT: "⚠️ خطوة مهمة لتأكيد طلبك",
       confP: "احتفظي بكود الطلب أو بصورة لهذه الشاشة. ولتأكيد طلبك أرسلي الكود (أو صورة الشاشة) إلى واتساب أو ماسنجر صفحتنا، من نفس صاحبة الطلب، لنتواصل معك مباشرة بخصوص الطلب أو أي تأخير أو عدم توفر.",
       doneT: "تم استلام طلبك! 🎉", doneNo: "رقم طلبك", doneP: "سنتواصل معك على رقم هاتفك لتأكيد الطلب.", keepShop: "متابعة التسوق",
@@ -27,6 +40,9 @@
       foot: "بجامات ناعمة بلمسة وردية 💕", heroTitle: "بجامات ناعمة بأحلى التصاميم", heroSub: "اختاري مقاسك واطلبي عبر واتساب"
     },
     en: {
+      freeHint: "Add {n} more to get free delivery 🚚", freeDone: "🎉 Your delivery is free!",
+      bLow: "Only a few left", bBest: "Best seller", bNew: "New", shareL: "Share:", shareWa: "WhatsApp", shareFb: "Facebook", copyLink: "Copy link", linkCopied: "Link copied ✅", shareTxt: "Check out this product from Bride 💕",
+      aboutT: "About us", policyT: "Return & exchange policy", followUs: "Follow us:", fbL: "Facebook", ttL: "TikTok", waL: "WhatsApp", callUs: "Call us:",
       announce: "Order easily on WhatsApp", tag: "🌙 Pajama World", shopNow: "Shop now", hello: "Welcome! 💕",
       cart: "Cart", products: "Our products", search: "Search for a product...", empty: "No matching products",
       all: "All", offers: "Offers 🔥", add: "Add to cart", pickSize: "Please pick a size first 💕", pickColor: "Please pick a color first 💕", added: "Added to cart 🎀",
@@ -35,7 +51,7 @@
       needPlace: "Choose your area in {c} or type your city", needAreaHint: "For {c}, please choose your area in the second field 👇",
       payLbl: "💳 Payment method", needPay: "Please choose a payment method", pickArea: "Choose area 👇",
       sendOrder: "Confirm order ✅", sending: "Sending your order...", sendFail: "Could not send the order. Check your connection and try again",
-      doneWa: "💬 Send the code via WhatsApp", doneMs: "✉️ Send the code via Messenger", waMsg: "Hello, I'd like to confirm my order no.", copyId: "📋 Copy order code", copied: "Code copied ✅",
+      doneWa: "💬 Send the code via WhatsApp", doneMs: "✉️ Send the code via Messenger", doneFb: "Messenger not opening? Visit our Facebook page and message us there", pasteIt: "Code copied ✅ paste it in the chat", waMsg: "Hello, I'd like to confirm my order no.", copyId: "📋 Copy order code", copied: "Code copied ✅",
       confT: "⚠️ Important step to confirm your order",
       confP: "Keep your order code or take a screenshot of this screen. To confirm your order, send the code (or the screenshot) to our WhatsApp or Messenger, from the customer's own account, so we can reach you directly about the order, any delay or if an item is unavailable.",
       doneT: "We received your order! 🎉", doneNo: "Your order number", doneP: "We will contact you on your phone number to confirm.", keepShop: "Continue shopping",
@@ -102,7 +118,15 @@
     if (!n) return null;
     return shownCities().find((c) => norm(c.ar) === n || norm(c.en) === n) || null;
   }
+  const freeMin = () => +(S.freeDelivery && S.freeDelivery.min) || 0;
   function deliveryInfo() {
+    const d = deliveryInfo0();
+    if (freeMin() > 0 && cart.length && subtotal() >= freeMin() && (d.kind === "city" || d.kind === "other" || d.kind === "ask")) {
+      return Object.assign({}, d, { kind: d.kind === "ask" ? "other" : d.kind, price: 0, free: true });
+    }
+    return d;
+  }
+  function deliveryInfo0() {
     const rawA = ($("#area").value || "").trim();
     const raw = ($("#city").value || "").trim();
     if (rawA && areas().length) {
@@ -127,6 +151,9 @@
     const sub = subtotal(), d = deliveryInfo();
     const priced = d.kind === "city" || d.kind === "other";
     $("#sub").textContent = money(sub);
+    const fm = freeMin(), fh = $("#freeHint");
+    fh.hidden = !(fm > 0 && cart.length);
+    if (!fh.hidden) { fh.textContent = sub >= fm ? t("freeDone") : t("freeHint").replace("{n}", money(fm - sub)); fh.classList.toggle("ok", sub >= fm); }
     $("#delRow").hidden = d.kind === "none" || d.kind === "needArea";
     $("#delPrice").textContent = priced ? delText(d) : t("delLater");
     $("#total").textContent = money(sub + (priced ? d.price : 0));
@@ -143,7 +170,12 @@
     $("#langBtn").textContent = lang === "ar" ? "EN" : "عربي";
     document.querySelectorAll("[data-t]").forEach((e) => { if (t(e.dataset.t) != null) e.textContent = t(e.dataset.t); });
     document.querySelectorAll("[data-tp]").forEach((e) => (e.placeholder = t(e.dataset.tp)));
-    $("#announce").textContent = t(ordersOn() ? "announceOrder" : "announce");
+    $("#announce").textContent = (S.announce && (S.announce[lang] || S.announce.ar || "").trim()) || t(ordersOn() ? "announceOrder" : "announce");
+    $("#aboutTxt").textContent = pageTxt("about"); $("#policyTxt").textContent = pageTxt("policy");
+    renderSocial();
+    const ph = (S.phones || []).map((x) => String(x).trim()).filter(Boolean);
+    $("#phones").hidden = !ph.length;
+    $("#phones").innerHTML = ph.length ? `<span>📞 ${t("callUs")}</span>` + ph.map((x) => `<a href="tel:${esc(x.replace(/[^\d+]/g, ""))}" dir="ltr">${esc(x)}</a>`).join("") : "";
     $("#heroTitle").textContent = (S.hero && S.hero.title && S.hero.title[lang]) || t("heroTitle");
     $("#heroSub").textContent = (S.hero && S.hero.sub && S.hero.sub[lang]) || t(ordersOn() ? "heroSubOrder" : "heroSub");
     $("#footTxt").textContent = t("foot");
@@ -160,6 +192,23 @@
     renderCats(); renderGrid(); renderCart();
     if (pmId !== null) renderModal();
   }
+
+  const ICON_FB = '<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
+  const ICON_TT = '<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>';
+  const fixUrl = (v, base) => { v = String(v || "").trim(); if (!v) return ""; if (/^https?:\/\//i.test(v)) return v; return base + v.replace(/^@/, ""); };
+  function fbUrl() {
+    const f = (S.social && S.social.facebook) || "", m = String(S.messenger || "").trim();
+    if (f.trim()) return fixUrl(f, "https://www.facebook.com/");
+    if (/^\d{8,}$/.test(m)) return "https://www.facebook.com/profile.php?id=" + m;
+    return m ? fixUrl(m, "https://www.facebook.com/") : "";
+  }
+  function renderSocial() {
+    const fb = fbUrl(), tt = fixUrl(S.social && S.social.tiktok, "https://www.tiktok.com/@");
+    const box = $("#social"), wa = S.whatsapp ? "https://wa.me/" + S.whatsapp : "";
+    box.hidden = !(fb || tt || wa);
+    box.innerHTML = (wa ? `<a href="${esc(wa)}" target="_blank" rel="noopener"><span class="ic-wa">💬</span>${t("waL")}</a>` : "") + (fb ? `<a href="${esc(fb)}" target="_blank" rel="noopener">${ICON_FB}${t("fbL")}</a>` : "") + (tt ? `<a href="${esc(tt)}" target="_blank" rel="noopener">${ICON_TT}${t("ttL")}</a>` : "");
+  }
+  const tagHtml = (p) => (p.badge === "low" || p.badge === "best" || p.badge === "new") ? `<span class="tagb ${p.badge}">${t({ low: "bLow", best: "bBest", new: "bNew" }[p.badge])}</span>` : "";
 
   function renderCats() {
     const list = [{ id: "all", ar: "الكل", en: "All", icon: "💖" }, { id: "offers", ar: "العروض", en: "Offers", icon: "🔥" }].concat(S.categories);
@@ -181,7 +230,7 @@
         : `<svg class="sp a"><use href="#spark"/></svg><svg class="sp b"><use href="#spark"/></svg>${esc(p.emoji || "🎀")}`;
       const cols = p.colors || [];
       return `<article class="card" data-card="${p.id}">
-        ${off ? `<span class="badge"><svg class="ic"><use href="#bow"/></svg>${off}% ${t("off")}</span>` : ""}
+        ${off ? `<span class="badge"><svg class="ic"><use href="#bow"/></svg>${off}% ${t("off")}</span>` : ""}${tagHtml(p)}
         <div class="pic" data-open="${p.id}">${pic}${im.length > 1 ? `<span class="multi">📷 ${im.length}</span>` : ""}${p.soldOut ? `<div class="soldtag">${t("sold")}</div>` : ""}</div>
         <div class="info">
           <h4 data-open="${p.id}">${esc(p.name[lang])}</h4>
@@ -252,14 +301,26 @@
         ${im.length > 1 ? `<div class="pm-thumbs">${im.map((s, i) => `<button type="button" class="pm-th ${i === pmIdx ? "on" : ""}" data-th="${i}"><img src="${esc(s)}" alt=""></button>`).join("")}</div>` : ""}
       </div>
       <div class="pm-info">
-        <h3>${esc(p.name[lang])}</h3>
+        ${tagHtml(p)}<h3>${esc(p.name[lang])}</h3>
         <div class="price"><b>${money(p.price)}</b>${off ? `<s>${money(p.oldPrice)}</s><span class="badge" style="position:static">${off}% ${t("off")}</span>` : ""}</div>
         ${desc ? `<p class="pm-desc">${esc(desc).replace(/\n/g, "<br>")}</p>` : ""}
         <div class="pm-lbl">${t("size")}</div>
         <div class="sizes">${p.sizes.map((s) => `<button type="button" class="size ${picked[p.id] === s ? "on" : ""}" data-ms="${esc(s)}">${esc(s)}</button>`).join("")}</div>
         ${cols.length ? `<div class="pm-lbl">${t("colorL")}</div><div class="colors">${cols.map((c) => clrChip("data-mc", p.id, c, pickedColor[p.id] === c)).join("")}</div>` : ""}
         <button type="button" class="add" id="pmAdd" ${p.soldOut ? "disabled" : ""}>${p.soldOut ? t("sold") : t("add")}</button>
+        <div class="share"><small>${t("shareL")}</small>
+          <a class="sh" id="shWa" target="_blank" rel="noopener">${t("shareWa")}</a>
+          <a class="sh" id="shFb" target="_blank" rel="noopener">${t("shareFb")}</a>
+          <button type="button" class="sh" id="shCp">${t("copyLink")}</button></div>
       </div>`;
+    const link = location.origin + location.pathname + "?p=" + p.id, txt = t("shareTxt") + " " + p.name[lang];
+    $("#shWa").href = "https://wa.me/?text=" + encodeURIComponent(txt + "\n" + link);
+    $("#shFb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(link);
+    $("#shCp").onclick = async () => {
+      try { await navigator.clipboard.writeText(link); }
+      catch (e) { const ta = document.createElement("textarea"); ta.value = link; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e2) {} ta.remove(); }
+      toast(t("linkCopied"));
+    };
     document.querySelectorAll("[data-nav]").forEach((b) => (b.onclick = () => stepImg(+b.dataset.nav)));
     document.querySelectorAll("[data-th]").forEach((b) => (b.onclick = () => { pmIdx = +b.dataset.th; renderModal(); }));
     document.querySelectorAll("[data-ms]").forEach((b) => (b.onclick = () => {
@@ -325,6 +386,7 @@
     dw.href = "https://wa.me/" + S.whatsapp + "?text=" + encodeURIComponent(t("waMsg") + " " + id);
     const dm = $("#doneMs"), mid = String(S.messenger || "").trim().replace(/^https?:\/\/(www\.)?(m\.me|facebook\.com|fb\.com)\//i, "").replace(/\/+$/, "");
     dm.hidden = !mid; dm.href = "https://m.me/" + encodeURIComponent(mid);
+    const df = $("#doneFb"); df.hidden = !mid; df.href = "https://www.facebook.com/" + encodeURIComponent(mid);
     lastId = id;
     $("#cartBody").hidden = true; $("#done").hidden = false;
   }
@@ -407,6 +469,7 @@
     catch (e) { const ta = document.createElement("textarea"); ta.value = lastId; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e2) {} ta.remove(); }
     toast(t("copied"));
   };
+  $("#doneMs").addEventListener("click", async () => { try { await navigator.clipboard.writeText(lastId); toast(t("pasteIt")); } catch (e) {} });
   const wa = "https://wa.me/" + S.whatsapp;
   $("#waLink").href = wa; $("#waFloat").href = wa;
   $("#langBtn").onclick = () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); };
@@ -416,4 +479,5 @@
   $("#drawer").onclick = (e) => { if (e.target.id === "drawer") $("#drawer").hidden = true; };
   $("#search").oninput = (e) => { q = e.target.value; renderGrid(); };
   applyLang();
+  try { const pid = +new URLSearchParams(location.search).get("p"); if (pid && prod(pid)) openProduct(pid); } catch (e) {}
 })();

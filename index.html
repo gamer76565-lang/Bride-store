@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -100,10 +100,17 @@
   </section>
 </main>
 
+<section class="wrap info-pages" id="about">
+  <details class="ip"><summary data-t="aboutT">من نحن</summary><div id="aboutTxt" class="ip-body"></div></details>
+  <details class="ip" id="policyBox"><summary data-t="policyT">سياسة الإرجاع والتبديل</summary><div id="policyTxt" class="ip-body"></div></details>
+</section>
+
 <footer>
   <div class="wrap foot">
     <img src="logo.png" alt="برايد" class="foot-logo">
     <p id="footTxt"></p>
+    <div id="phones" class="phones" hidden></div>
+    <div id="social" class="social" hidden></div>
     <a id="waLink" class="pill big wa" target="_blank" rel="noopener" data-t="chat">تواصلي معنا على واتساب</a>
     <small id="copy"></small>
   </div>
@@ -123,6 +130,7 @@
     <div class="sum">
       <div class="sum-row"><span data-t="subtotal">مجموع المنتجات</span><b id="sub"></b></div>
       <div class="sum-row" id="delRow" hidden><span data-t="delivery">التوصيل</span><b id="delPrice"></b></div>
+      <div id="freeHint" class="freehint" hidden></div>
       <div class="total"><span id="totalLbl" data-t="total">الإجمالي</span><b id="total"></b></div>
     </div>
     <form id="orderForm">
@@ -159,12 +167,13 @@
       </div>
       <a id="doneWa" class="pill big wa" target="_blank" rel="noopener" hidden data-t="doneWa">💬 إرسال الكود عبر واتساب</a>
       <a id="doneMs" class="pill big ms" target="_blank" rel="noopener" hidden data-t="doneMs">✉️ إرسال الكود عبر ماسنجر</a>
+      <a id="doneFb" class="fb-link" target="_blank" rel="noopener" hidden data-t="doneFb">لا يفتح ماسنجر؟ افتحي صفحتنا على فيسبوك وراسلينا من هناك</a>
       <button id="doneBtn" type="button" class="pill big" data-t="keepShop">متابعة التسوق</button>
     </div>
   </div>
 </aside>
 
-<script src="products.js"></script>
-<script src="app.js"></script>
+<script src="products.js?v=8"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
