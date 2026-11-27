@@ -42,6 +42,141 @@ window.STORE = {
   "products": [
     {
       "name": {
+        "ar": "بجامه الكاروهات",
+        "en": "بجامه الكاروهات"
+      },
+      "category": "winter",
+      "price": 49,
+      "oldPrice": 65,
+      "sizes": [
+        "s",
+        "m",
+        "L"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/9e89db902qnc.jpg",
+        "images/5b283f2618.jpg",
+        "images/4bd4f0cf2uw0.jpg"
+      ],
+      "image": "images/9e89db902qnc.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "قطن نعام و مبطنه",
+        "en": "قطن نعام و مبطنه"
+      },
+      "colors": [],
+      "id": 18,
+      "badge": "best"
+    },
+    {
+      "name": {
+        "ar": "بجامه الفيونكه الرصاصيه 3",
+        "en": "بجامه الفيونكه الرصاصيه 3"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/403349b3236g.jpg",
+        "images/6aa1ec171x9s.jpg",
+        "images/4dd2d8c12f48.jpg"
+      ],
+      "image": "images/403349b3236g.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "خامه قطن ناعم و مبطنه",
+        "en": "خامه قطن ناعم و مبطنه"
+      },
+      "id": 13
+    },
+    {
+      "name": {
+        "ar": "بجامه الفلامنقو",
+        "en": "بجامه الفلامنقو"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/94a5b8381wrw.jpg",
+        "images/24a8764a1luc.jpg",
+        "images/504569c81t4k.jpg"
+      ],
+      "image": "images/94a5b8381wrw.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "خامه قطن و مبطنه من الداخل قطن",
+        "en": "خامه قطن و مبطنه من الداخل قطن"
+      },
+      "id": 11
+    },
+    {
+      "name": {
+        "ar": "بجامه فيونكه الورديه",
+        "en": "بجامه فيونكه الورديه"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "s",
+        "m",
+        "L"
+      ],
+      "emoji": "🎀",
+      "image": "images/2a4a89a42dpw.jpg",
+      "soldOut": false,
+      "id": 9,
+      "images": [
+        "images/2a4a89a42dpw.jpg",
+        "images/ff62e0001h88.jpg"
+      ],
+      "desc": {
+        "ar": "خامه قطنيه ناعمه مبطنه قطن",
+        "en": "خامه قطنيه ناعمه مبطنه قطن"
+      }
+    },
+    {
+      "name": {
+        "ar": "بجامه هالو كاتي البيضاء",
+        "en": "بجامه هالو كاتي البيضاء"
+      },
+      "category": "winter",
+      "price": 59,
+      "oldPrice": 65,
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/a24729ad1xho.jpg",
+        "images/51f4eb511olw.jpg",
+        "images/747a704f1nfc.jpg"
+      ],
+      "image": "images/a24729ad1xho.jpg",
+      "soldOut": false,
+      "desc": {
+        "ar": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن",
+        "en": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن"
+      },
+      "id": 10,
+      "badge": "best",
+      "colors": []
+    },
+    {
+      "name": {
         "ar": "بجامه كاتفه 11",
         "en": "بجامه كاتفه 11"
       },
@@ -95,35 +230,6 @@ window.STORE = {
       },
       "colors": [],
       "id": 20
-    },
-    {
-      "name": {
-        "ar": "بجامه الكاروهات",
-        "en": "بجامه الكاروهات"
-      },
-      "category": "winter",
-      "price": 49,
-      "oldPrice": 65,
-      "sizes": [
-        "s",
-        "m",
-        "L"
-      ],
-      "emoji": "🎀",
-      "images": [
-        "images/9e89db902qnc.jpg",
-        "images/5b283f2618.jpg",
-        "images/4bd4f0cf2uw0.jpg"
-      ],
-      "image": "images/9e89db902qnc.jpg",
-      "soldOut": false,
-      "desc": {
-        "ar": "قطن نعام و مبطنه",
-        "en": "قطن نعام و مبطنه"
-      },
-      "colors": [],
-      "id": 18,
-      "badge": "best"
     },
     {
       "name": {
@@ -271,32 +377,6 @@ window.STORE = {
     },
     {
       "name": {
-        "ar": "بجامه الفيونكه الرصاصيه 3",
-        "en": "بجامه الفيونكه الرصاصيه 3"
-      },
-      "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
-      "sizes": [
-        "L",
-        "XL"
-      ],
-      "emoji": "🎀",
-      "images": [
-        "images/403349b3236g.jpg",
-        "images/6aa1ec171x9s.jpg",
-        "images/4dd2d8c12f48.jpg"
-      ],
-      "image": "images/403349b3236g.jpg",
-      "soldOut": false,
-      "desc": {
-        "ar": "خامه قطن ناعم و مبطنه",
-        "en": "خامه قطن ناعم و مبطنه"
-      },
-      "id": 13
-    },
-    {
-      "name": {
         "ar": "بجامه الفيونكه الرصاصيه 2",
         "en": "بجامه الفيونكه الرصاصيه 2"
       },
@@ -323,83 +403,31 @@ window.STORE = {
     },
     {
       "name": {
-        "ar": "بجامه الفلامنقو",
-        "en": "بجامه الفلامنقو"
+        "ar": "بجامه سنوبي كاتفه",
+        "en": "بجامه سنوبي كاتفه"
       },
       "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
+      "price": 95,
+      "oldPrice": 115,
       "sizes": [
-        "L",
-        "XL"
-      ],
-      "emoji": "🎀",
-      "images": [
-        "images/94a5b8381wrw.jpg",
-        "images/24a8764a1luc.jpg",
-        "images/504569c81t4k.jpg"
-      ],
-      "image": "images/94a5b8381wrw.jpg",
-      "soldOut": false,
-      "desc": {
-        "ar": "خامه قطن و مبطنه من الداخل قطن",
-        "en": "خامه قطن و مبطنه من الداخل قطن"
-      },
-      "id": 11
-    },
-    {
-      "name": {
-        "ar": "بجامه هالو كاتي البيضاء",
-        "en": "بجامه هالو كاتي البيضاء"
-      },
-      "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
-      "sizes": [
-        "L",
-        "XL"
-      ],
-      "emoji": "🎀",
-      "images": [
-        "images/a24729ad1xho.jpg",
-        "images/51f4eb511olw.jpg",
-        "images/747a704f1nfc.jpg"
-      ],
-      "image": "images/a24729ad1xho.jpg",
-      "soldOut": false,
-      "desc": {
-        "ar": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن",
-        "en": "بجامه هالو كاتي بلون الابيض خامه قطن ناعم و مبطنه بقطن"
-      },
-      "id": 10,
-      "badge": "best",
-      "colors": []
-    },
-    {
-      "name": {
-        "ar": "بجامه فيونكه الورديه",
-        "en": "بجامه فيونكه الورديه"
-      },
-      "category": "winter",
-      "price": 59,
-      "oldPrice": 65,
-      "sizes": [
-        "s",
-        "m",
+        "M",
         "L"
       ],
       "emoji": "🎀",
-      "image": "images/2a4a89a42dpw.jpg",
-      "soldOut": false,
-      "id": 9,
       "images": [
-        "images/2a4a89a42dpw.jpg",
-        "images/ff62e0001h88.jpg"
+        "images/abcea5f51nd0.jpg",
+        "images/ed6410ef1m98.jpg",
+        "images/b1add2741mys.jpg"
       ],
+      "image": "images/abcea5f51nd0.jpg",
+      "soldOut": false,
+      "badge": "new",
       "desc": {
-        "ar": "خامه قطنيه ناعمه مبطنه قطن",
-        "en": "خامه قطنيه ناعمه مبطنه قطن"
-      }
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 28
     },
     {
       "name": {
@@ -449,6 +477,106 @@ window.STORE = {
       },
       "colors": [],
       "id": 21
+    },
+    {
+      "name": {
+        "ar": "بجامه صيفيه (كود 56)",
+        "en": "بجامه صيفيه (كود 56)"
+      },
+      "category": "summer",
+      "price": 35,
+      "oldPrice": 45,
+      "sizes": [
+        "استندر"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/2452302a1018.jpg"
+      ],
+      "image": "images/2452302a1018.jpg",
+      "soldOut": false,
+      "badge": "",
+      "desc": {
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 27
+    },
+    {
+      "name": {
+        "ar": "بجامه صيفيه (كود 55)",
+        "en": "بجامه صيفيه (كود 55)"
+      },
+      "category": "summer",
+      "price": 35,
+      "oldPrice": 45,
+      "sizes": [
+        "استندر"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/383c141119xc.jpg"
+      ],
+      "image": "images/383c141119xc.jpg",
+      "soldOut": false,
+      "badge": "",
+      "desc": {
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 26
+    },
+    {
+      "name": {
+        "ar": "بجامه صيفيه (كود 34)",
+        "en": "بجامه صيفيه (كود 34)"
+      },
+      "category": "summer",
+      "price": 35,
+      "oldPrice": 45,
+      "sizes": [
+        "استندر"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/a39d72fb1754.jpg"
+      ],
+      "image": "images/a39d72fb1754.jpg",
+      "soldOut": false,
+      "badge": "",
+      "desc": {
+        "ar": "",
+        "en": ""
+      },
+      "colors": [],
+      "id": 25
+    },
+    {
+      "name": {
+        "ar": "بجامه صيفيه (كود 33)",
+        "en": "بجامه صيفيه (كود 33)"
+      },
+      "category": "summer",
+      "price": 35,
+      "oldPrice": 45,
+      "sizes": [
+        "استندر"
+      ],
+      "emoji": "🎀",
+      "images": [
+        "images/83795d131nls.jpg"
+      ],
+      "image": "images/83795d131nls.jpg",
+      "soldOut": false,
+      "badge": "",
+      "desc": {
+        "ar": "خامه صيفيه خفيفه قطنيه",
+        "en": "خامه صيفيه خفيفه قطنيه"
+      },
+      "colors": [],
+      "id": 24
     }
   ],
   "delivery": {
