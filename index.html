@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>برايد | Bride</title>
 <link rel="icon" href="favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ee6c87">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="برايد">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 
@@ -89,9 +94,15 @@
   <div class="filters">
     <input id="search" type="search" data-tp="search" placeholder="ابحثي عن منتج...">
     <div id="cats" class="chips"></div>
+    <div class="sortbar"><select id="sortSel" aria-label="sort"></select><select id="sizeSel" aria-label="size" hidden></select></div>
   </div>
   <div id="grid" class="grid"></div>
   <p id="empty" class="empty" hidden data-t="empty">لا توجد منتجات مطابقة</p>
+
+  <section id="reviewsSec" class="reviews" hidden>
+    <div class="sec-title"><svg class="ic"><use href="#heart"/></svg><h3 data-t="reviewsT">آراء زبوناتنا 💕</h3><svg class="ic"><use href="#heart"/></svg></div>
+    <div id="reviews" class="rv-row"></div>
+  </section>
 
   <section class="why">
     <div class="why-card"><span>🛒</span><h4 data-t="w1t">اختاري واطلبي</h4><p data-t="w1p">اختاري القطعة والمقاس وأضيفيها للسلة</p></div>
@@ -111,6 +122,7 @@
     <p id="footTxt"></p>
     <div id="phones" class="phones" hidden></div>
     <div id="social" class="social" hidden></div>
+    <button id="installBtn" type="button" class="pill ghost" hidden data-t="installL">📲 ثبّتي موقعنا كتطبيق</button>
     <a id="waLink" class="pill big wa" target="_blank" rel="noopener" data-t="chat">تواصلي معنا على واتساب</a>
     <small id="copy"></small>
   </div>
@@ -119,6 +131,12 @@
 <a id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 <div id="pm" class="modal" hidden>
   <div class="pm-card"><button id="pmClose" class="pm-x" type="button" aria-label="close">✕</button><div id="pmBody" class="pm-body"></div></div>
+</div>
+<div id="lb" class="lb" dir="ltr" hidden>
+  <button id="lbX" class="lb-x" type="button" aria-label="close">✕</button>
+  <button id="lbP" class="lb-nav lbp" type="button">‹</button>
+  <div id="lbBox" class="lb-box"><img id="lbImg" alt=""></div>
+  <button id="lbN" class="lb-nav lbn" type="button">›</button>
 </div>
 <div id="toast" class="toast" hidden></div>
 
@@ -154,6 +172,7 @@
       <textarea name="note" rows="2" data-tp="note" placeholder="ملاحظات (اختياري)"></textarea>
       <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button id="sendBtn" class="pill big wa" type="submit" data-t="send">إرسال الطلب عبر واتساب</button>
+      <button id="forgetMe" type="button" class="fb-link" hidden data-t="forget">🗑️ مسح بياناتي المحفوظة على هذا الجهاز</button>
     </form>
     </div>
     <div id="done" class="done" hidden>
@@ -162,18 +181,27 @@
       <p id="doneId" class="done-id"></p>
       <button id="copyId" type="button" class="pill ghost" data-t="copyId">📋 نسخ كود الطلب</button>
       <div class="confirm-box">
-        <b data-t="confT">⚠️ خطوة مهمة لتأكيد طلبك</b>
-        <p data-t="confP">احتفظي بكود الطلب أو بصورة لهذه الشاشة. ولتأكيد طلبك أرسلي الكود (أو صورة الشاشة) إلى واتساب أو ماسنجر صفحتنا، من نفس صاحبة الطلب، لنتواصل معك مباشرة بخصوص الطلب أو أي تأخير أو عدم توفر.</p>
+        <b data-t="confT">⚠️ مهم: طلبك لم يُؤكَّد بعد</b>
+        <ol>
+          <li data-t="confS1">احفظي الفاتورة أدناه كصورة (زر «حفظ الفاتورة») أو خذي لقطة شاشة لها.</li>
+          <li data-t="confS2">أرسلي كود الطلب أو صورة الفاتورة إلى واتساب أو ماسنجر صفحتنا من الزرّين أدناه.</li>
+          <li data-t="confS3">بعد وصول رسالتك نؤكد طلبك ونتواصل معك مباشرة بخصوص التوصيل أو أي تأخير أو عدم توفر قطعة.</li>
+        </ol>
       </div>
       <a id="doneWa" class="pill big wa" target="_blank" rel="noopener" hidden data-t="doneWa">💬 إرسال الكود عبر واتساب</a>
       <a id="doneMs" class="pill big ms" target="_blank" rel="noopener" hidden data-t="doneMs">✉️ إرسال الكود عبر ماسنجر</a>
       <a id="doneFb" class="fb-link" target="_blank" rel="noopener" hidden data-t="doneFb">لا يفتح ماسنجر؟ افتحي صفحتنا على فيسبوك وراسلينا من هناك</a>
-      <button id="doneBtn" type="button" class="pill big" data-t="keepShop">متابعة التسوق</button>
+      <div id="invoice" class="inv"></div>
+      <div class="inv-actions">
+        <button id="saveInv" type="button" class="pill big" data-t="saveInv">🖼️ حفظ الفاتورة كصورة</button>
+        <button id="printInv" type="button" class="pill ghost" data-t="printInv">🖨️ طباعة / PDF</button>
+      </div>
+      <button id="doneBtn" type="button" class="pill big ghost" data-t="keepShop">متابعة التسوق</button>
     </div>
   </div>
 </aside>
 
-<script src="products.js?v=8"></script>
-<script src="app.js?v=8"></script>
+<script src="products.js?v=13"></script>
+<script src="app.js?v=13"></script>
 </body>
 </html>
